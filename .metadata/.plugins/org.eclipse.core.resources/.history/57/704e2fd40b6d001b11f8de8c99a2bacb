@@ -1,0 +1,8 @@
+
+public class Blouse extends Product{
+	
+	public Blouse(String productID, String name, int price, String category, int stock, String colour) {
+		super(productID, name, price, category, stock, colour);
+		
+	}
+}

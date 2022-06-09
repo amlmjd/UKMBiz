@@ -1,0 +1,317 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.JTable;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+
+import javax.swing.ImageIcon;
+
+public class SearchProduct extends JFrame implements ActionListener{
+
+	private JPanel contentPane;
+	private JTextField txt_search;
+	private JTable tbl_product;
+	private JButton btn_back;
+	private JButton btn_search;
+	
+	ArrayList<Handbag> handbagList = new ArrayList<Handbag>();
+	ArrayList<Shoes> shoesList = new ArrayList<Shoes>();
+	ArrayList<Blouse> blouseList = new ArrayList<Blouse>();
+	ArrayList<Product> productList = new ArrayList<Product>();
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SearchProduct frame = new SearchProduct();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @throws IOException 
+	 */
+	public SearchProduct() throws IOException {
+		ReadProductFile();
+		
+		setTitle("UKMBiz");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 760, 470);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lbl_product = new JLabel("Product");
+		lbl_product.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_product.setBounds(245, 97, 49, 17);
+		contentPane.add(lbl_product);
+		
+		txt_search = new JTextField();
+		txt_search.setBounds(304, 98, 142, 20);
+		contentPane.add(txt_search);
+		txt_search.setColumns(10);
+		
+		btn_search = new JButton("SEARCH");
+		btn_search.setBounds(456, 97, 89, 23);
+		contentPane.add(btn_search);
+		
+		tbl_product = new JTable();
+		tbl_product.setBackground(SystemColor.menu);
+		tbl_product.setBounds(38, 145, 669, 218);
+		contentPane.add(tbl_product);
+		
+		btn_back = new JButton("BACK");
+		btn_back.setBounds(618, 374, 89, 23);
+		contentPane.add(btn_back);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.RED);
+		panel.setBounds(0, 0, 744, 54);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lbl_title = new JLabel("Search Product");
+		lbl_title.setForeground(Color.WHITE);
+		lbl_title.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lbl_title.setBounds(180, 0, 234, 53);
+		panel.add(lbl_title);
+		
+		JLabel lbl_logo = new JLabel("");
+		lbl_logo.setIcon(new ImageIcon("pictures/ukmbiz logo3.jpg"));
+		lbl_logo.setBounds(0, 0, 160, 53);
+		panel.add(lbl_logo);
+		
+		btn_back.addActionListener(this);
+		btn_search.addActionListener(this);
+	}
+	
+	public void ReadHandbagFile() throws IOException {
+		FileReader file = new FileReader("Handbag.txt");
+		try(BufferedReader in = new BufferedReader(file)){
+			String input = "";
+			
+			while((input = in.readLine()) !=null) {
+				StringTokenizer word = new StringTokenizer(input, ";");
+				
+				String productID = word.nextToken();
+				String name = word.nextToken();
+				int price = Integer.parseInt(word.nextToken());
+				String colour = word.nextToken();
+				String category = word.nextToken();
+				int stock = Integer.parseInt(word.nextToken());
+				String description = word.nextToken();
+				
+				 Handbag pr = new Handbag(productID,name,price,colour,category,stock,description);
+				
+				handbagList.add(pr);
+				
+			}
+		}
+	}
+	
+	public void ReadShoesFile() throws IOException {
+		FileReader file = new FileReader("Shoes.txt");
+		try(BufferedReader in = new BufferedReader(file)){
+			String input = "";
+			
+			while((input = in.readLine()) !=null) {
+				StringTokenizer word = new StringTokenizer(input, ";");
+				
+				String productID = word.nextToken();
+				String name = word.nextToken();
+				int price = Integer.parseInt(word.nextToken());
+				String colour = word.nextToken();
+				String category = word.nextToken();
+				int stock = Integer.parseInt(word.nextToken());
+				String description = word.nextToken();
+				
+				 Shoes s = new Shoes(productID,name,price,colour,category,stock,description);
+				
+				shoesList.add(s);
+				
+			}
+		}
+	}
+	
+	public void ReadBlouseFile() throws IOException {
+		FileReader file = new FileReader("Blouse.txt");
+		try(BufferedReader in = new BufferedReader(file)){
+			String input = "";
+			
+			while((input = in.readLine()) !=null) {
+				StringTokenizer word = new StringTokenizer(input, ";");
+				
+				String productID = word.nextToken();
+				String name = word.nextToken();
+				int price = Integer.parseInt(word.nextToken());
+				String colour = word.nextToken();
+				String category = word.nextToken();
+				int stock = Integer.parseInt(word.nextToken());
+				String description = word.nextToken();
+				
+				 Blouse b = new Blouse(productID,name,price,colour,category,stock,description);
+				
+				blouseList.add(b);
+				
+			}
+		}
+	}
+	
+	public void ReadProductFile() throws IOException {
+		FileReader file = new FileReader("Product.txt");
+		try(BufferedReader in = new BufferedReader(file)){
+			String input = "";
+			
+			while((input = in.readLine()) !=null) {
+				StringTokenizer word = new StringTokenizer(input, ";");
+				
+				String productID = word.nextToken();
+				String name = word.nextToken();
+				double price = Double.parseDouble(word.nextToken());
+				String colour = word.nextToken();
+				String category = word.nextToken();
+				int stock = Integer.parseInt(word.nextToken());
+				String description = word.nextToken();
+				
+				 Product pr = new Product(productID,name,price,colour,category,stock,description);
+				
+				productList.add(pr);
+				
+			}
+		}
+	}
+	
+//	public JTable addRowData()
+//	{
+//		JTable tbl_update;
+//	    Object[] columns = {"Product ID","Name","Price","Colour"};
+//	    Object data[][] = new Object[productList.size()][4];
+//	    
+//	    for(int i=0; i<productList.size(); i++) {
+//	    	Product item = productList.get(i);
+//	    	
+//	    	data[i][0] = item.getProductID();
+//	    	data[i][1] = item.getName();
+//	    	data[i][2] = item.getPrice();
+//	    	data[i][3] = item.getColour();
+//	    }
+//	    	tbl_update = new JTable(data, columns);
+//	    	return tbl_update;
+//	}
+	
+	public JTable addBlouseRowData()
+	{
+		JTable tbl_update;
+	    Object[] columns = {"Product ID","Name","Price","Colour"};
+	    Object data[][] = new Object[handbagList.size()][4];
+	    
+	    for(int i=0; i<handbagList.size(); i++) {
+	    	Product item = handbagList.get(i);
+	    	
+	    	data[i][0] = item.getProductID();
+	    	data[i][1] = item.getName();
+	    	data[i][2] = item.getPrice();
+	    	data[i][3] = item.getColour();
+	    }
+	    	tbl_update = new JTable(data, columns);
+	    	return tbl_update;
+	}
+	
+	public JTable addShoesRowData()
+	{
+		JTable tbl_update;
+	    Object[] columns = {"Product ID","Name","Price","Colour"};
+	    Object data[][] = new Object[shoesList.size()][4];
+	    
+	    for(int i=0; i<shoesList.size(); i++) {
+	    	Product item = shoesList.get(i);
+	    	
+	    	data[i][0] = item.getProductID();
+	    	data[i][1] = item.getName();
+	    	data[i][2] = item.getPrice();
+	    	data[i][3] = item.getColour();
+	    }
+	    	tbl_update = new JTable(data, columns);
+	    	return tbl_update;
+	}
+	
+	public JTable addHandbagRowData()
+	{
+		JTable tbl_update;
+	    Object[] columns = {"Product ID","Name","Price","Colour"};
+	    Object data[][] = new Object[handbagList.size()][4];
+	    
+	    for(int i=0; i<handbagList.size(); i++) {
+	    	Product item = handbagList.get(i);
+	    	
+	    	data[i][0] = item.getProductID();
+	    	data[i][1] = item.getName();
+	    	data[i][2] = item.getPrice();
+	    	data[i][3] = item.getColour();
+	    }
+	    	tbl_update = new JTable(data, columns);
+	    	return tbl_update;
+	}
+	
+	public void back() throws IOException
+	{
+		SearchProduct menu = new SearchProduct();
+		menu.setVisible(true);
+		this.dispose();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("SEARCH")) {
+			if(txt_search.getText().equals("")) {
+				JOptionPane.showMessageDialog(null,"Form is not complete.");
+			}
+			else {
+				if(txt_search.getText().equals("Blouse")) {
+					 tbl_product = addBlouseRowData();
+				}
+				else if(txt_search.getText().equals("Shoes")) {
+					tbl_product = addShoesRowData();
+				}
+				else if(txt_search.getText().equals("Handbag")){
+					tbl_product = addHandbagRowData();
+				}
+			}
+		}
+	}
+}
+

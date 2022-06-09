@@ -1,0 +1,250 @@
+import java.awt.BorderLayout;
+import java.io.FileReader; 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
+import javax.swing.JPasswordField;
+
+public class Register extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txt_username;
+	private JTextField txt_email;
+	private JTextField txt_phoneNum;
+	private JPasswordField txt_password;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Register frame = new Register();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Register() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 877, 545);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.RED);
+		panel.setBounds(0, 0, 351, 508);
+		contentPane.add(panel);
+		
+		JLabel lbl_picture = new JLabel("");
+		lbl_picture.setIcon(new ImageIcon("pictures/ukmbizlogo2.jpg"));
+		lbl_picture.setBounds(72, 181, 208, 100);
+		panel.add(lbl_picture);
+		
+		JLabel lblNewLabel_2 = new JLabel("letak la motto kita hahah");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(82, 291, 170, 22);
+		panel.add(lblNewLabel_2);
+		
+		JButton btn_have_account = new JButton("Already have an account? Login");
+		btn_have_account.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Login nw = new Login();
+				nw.setVisible(true);
+			}
+		});
+		btn_have_account.setHorizontalAlignment(SwingConstants.LEFT);
+		btn_have_account.setForeground(Color.WHITE);
+		btn_have_account.setBackground(Color.RED);
+		btn_have_account.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btn_have_account.setBounds(0, 10, 227, 21);
+		panel.add(btn_have_account);
+		
+		JLabel lbl_title = new JLabel("Registration Form");
+		lbl_title.setForeground(Color.RED);
+		lbl_title.setFont(new Font("Tahoma", Font.BOLD, 27));
+		lbl_title.setBounds(481, 33, 258, 41);
+		contentPane.add(lbl_title);
+		
+		JLabel lbl_username = new JLabel("Username");
+		lbl_username.setForeground(Color.GRAY);
+		lbl_username.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_username.setBounds(424, 109, 64, 22);
+		contentPane.add(lbl_username);
+		
+		txt_username = new JTextField();
+		txt_username.setColumns(10);
+		txt_username.setBounds(425, 132, 378, 41);
+		contentPane.add(txt_username);
+		
+		JLabel lbl_email = new JLabel("Email");
+		lbl_email.setForeground(Color.GRAY);
+		lbl_email.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_email.setBounds(424, 183, 64, 22);
+		contentPane.add(lbl_email);
+		
+		txt_email = new JTextField();
+		txt_email.setColumns(10);
+		txt_email.setBounds(424, 205, 378, 41);
+		contentPane.add(txt_email);
+		
+		JLabel lbl_password = new JLabel("Password");
+		lbl_password.setForeground(Color.GRAY);
+		lbl_password.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_password.setBounds(424, 256, 64, 22);
+		contentPane.add(lbl_password);
+		
+		JLabel lbl_phoneNum = new JLabel("Mobile Number");
+		lbl_phoneNum.setForeground(Color.GRAY);
+		lbl_phoneNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbl_phoneNum.setBounds(425, 361, 115, 22);
+		contentPane.add(lbl_phoneNum);
+		
+		txt_phoneNum = new JTextField();
+		txt_phoneNum.setColumns(10);
+		txt_phoneNum.setBounds(425, 381, 378, 41);
+		contentPane.add(txt_phoneNum);
+		
+		JButton btn_signup = new JButton("Sign Up");
+		btn_signup.addActionListener(new ActionListener() {
+			 
+//			public void addActionEvent() {
+//				 showPassword.addActionListener(this);
+//			 }
+			 
+			public void actionPerformed(ActionEvent e) {
+				String name = txt_username.getText();
+				String email = txt_email.getText();
+				String password = txt_password.getText();
+//				String password = passwordField.getText();
+				String mobile = txt_phoneNum.getText();
+//			     if (e.getSource() == showPassword) {
+//			            if (showPassword.isSelected()) {
+//			                passwordField.setEchoChar((char) 0);
+//			            } else {
+//			                passwordField.setEchoChar('*');
+//			            }
+//			        }
+				if(name.isEmpty() || email.isEmpty() || password.isEmpty() || mobile.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Data cannot empty", "Error",JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					String Name, Email, Pass, MobileNum, aName, aEmail, aPass, aMobile;
+					boolean found = false;
+					aName = txt_username.getText();
+					aEmail = txt_email.getText();
+					aPass = txt_password.getText();
+					//aPass = passwordField.getText();
+					aMobile = txt_phoneNum.getText();
+					
+					try {
+						FileReader reader = new FileReader("Registration.txt");
+						FileWriter file = new FileWriter ("Registration.txt",true);
+						//FileWriter file1 = new FileWriter("login.txt");
+						PrintWriter outFile = new PrintWriter(file);
+						//PrintWriter outFile1 = new PrintWriter(file1);
+						
+						Scanner a = new Scanner(reader);
+						
+						while(a.hasNextLine()) {
+							String line = a.nextLine();
+							StringTokenizer st = new StringTokenizer(line,";");
+							Name = st.nextToken();
+							Email = st.nextToken();
+							Pass = st.nextToken();
+							MobileNum = st.nextToken();
+								
+							if(Name.equals(aName) && Email.equals(aEmail) && Pass.equals(aPass) && MobileNum.equals(aMobile)) {
+								found=true;
+							}
+						}
+						
+						if(found)
+							JOptionPane.showMessageDialog(null, "Already Registered!");
+						else {
+							JOptionPane.showMessageDialog(null, "Register Successfully");
+							txt_username.setText("");
+							txt_email.setText("");
+							//txtPass.setText("");
+							//passwordField.setText("");
+							txt_phoneNum.setText("");
+							
+							outFile.println(name+ ";" +password+ ";" +email+ ";" +mobile+ ";");
+							//outFile1.println(name+ ";" +password);
+							Login login = new Login();
+							login.setVisible(true);
+						}
+						reader.close();
+						outFile.close();
+						//outFile1.close();
+					}catch(Exception e1) {
+						System.out.print(e1.toString()); 
+					}
+				}
+				//JOptionPane.showMessageDialog(null, "Successful Sign Up!");
+				//dispose();
+//				Login login = new Login();
+//				login.setVisible(true);
+
+			}
+			
+		});
+		btn_signup.setForeground(Color.WHITE);
+		btn_signup.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btn_signup.setBackground(Color.RED);
+		btn_signup.setBounds(508, 453, 216, 41);
+		contentPane.add(btn_signup);
+		
+		txt_password = new JPasswordField();
+		txt_password.setBounds(425, 278, 378, 41);
+		contentPane.add(txt_password);
+		
+		JCheckBox checkbox_showpassword = new JCheckBox("Show Password");
+		checkbox_showpassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		checkbox_showpassword.setBounds(421, 325, 150, 30);
+		contentPane.add(checkbox_showpassword);
+		checkbox_showpassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(checkbox_showpassword.isSelected()) {
+					txt_password.setEchoChar((char)0);
+				}
+				else {
+					txt_password.setEchoChar('*');
+				}
+			}
+		});
+		checkbox_showpassword.setBackground(Color.WHITE);
+	}
+}

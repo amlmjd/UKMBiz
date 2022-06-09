@@ -1,0 +1,167 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Login extends JFrame implements ActionListener{
+
+	private JPanel contentPane;
+	private JTextField txt_email;
+	private JTextField txt_password;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Login() {
+		setTitle("UKMBiz");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 751, 489);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.RED);
+		panel.setBounds(362, 0, 383, 458);
+		contentPane.add(panel);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon("pictures/ukm2.jpg"));
+		lblNewLabel_2.setBounds(0, 28, 99, 59);
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblRegister = new JLabel("Register");
+		lblRegister.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegister.setForeground(Color.WHITE);
+		lblRegister.setFont(new Font("Tahoma", Font.BOLD, 29));
+		lblRegister.setBounds(107, 156, 161, 40);
+		panel.add(lblRegister);
+		
+		JLabel lblNewLabel_3 = new JLabel("Don't have an account? Register Now!");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(67, 195, 256, 22);
+		panel.add(lblNewLabel_3);
+		
+		JButton btn_createacc = new JButton("Create an Account");
+		btn_createacc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Register nw = new Register();
+				nw.setVisible(true);
+			}
+		});
+		btn_createacc.setForeground(Color.RED);
+		btn_createacc.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btn_createacc.setBackground(Color.WHITE);
+		btn_createacc.setBounds(77, 227, 223, 40);
+		panel.add(btn_createacc);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon("pictures/ukmbizlogo2.jpg"));
+		lblNewLabel_1.setBounds(260, 11, 210, 85);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lbl_title = new JLabel("Login");
+		lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_title.setForeground(Color.RED);
+		lbl_title.setFont(new Font("Tahoma", Font.BOLD, 29));
+		lbl_title.setBounds(120, 103, 110, 40);
+		contentPane.add(lbl_title);
+		
+		JLabel lbl_email = new JLabel("Email");
+		lbl_email.setForeground(Color.GRAY);
+		lbl_email.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_email.setBounds(57, 170, 45, 13);
+		contentPane.add(lbl_email);
+		
+		txt_email = new JTextField();
+		txt_email.setColumns(10);
+		txt_email.setBounds(57, 187, 242, 32);
+		contentPane.add(txt_email);
+		
+		JLabel lbl_password = new JLabel("Password");
+		lbl_password.setForeground(Color.GRAY);
+		lbl_password.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lbl_password.setBounds(57, 242, 78, 13);
+		contentPane.add(lbl_password);
+		
+		txt_password = new JTextField();
+		txt_password.setColumns(10);
+		txt_password.setBounds(57, 259, 242, 32);
+		contentPane.add(txt_password);
+		
+		JCheckBox chckbox_showpassword = new JCheckBox("Show Password");
+		chckbox_showpassword.setForeground(Color.GRAY);
+		chckbox_showpassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		chckbox_showpassword.setBackground(Color.WHITE);
+		chckbox_showpassword.setBounds(57, 300, 136, 21);
+		contentPane.add(chckbox_showpassword);
+		
+		JButton btn_login = new JButton("Log In");
+		btn_login.setForeground(Color.WHITE);
+		btn_login.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btn_login.setBackground(Color.RED);
+		btn_login.setBounds(120, 360, 110, 40);
+		contentPane.add(btn_login);
+	}
+	
+	public void chooseOne () {
+		ImageIcon icon = new ImageIcon ("pictures/user1-3.png");
+		String[] options = {"Buyer", "Seller"};
+        int opt = JOptionPane.showOptionDialog(null, "Are you a Buyer or Seller?", "User Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, options, options[0]);
+       
+        if(opt == 0) {
+        	BuyerHomePage buyer = new BuyerHomePage();
+        	buyer.setVisible(true);
+        }
+        else if(opt == 1) {
+        	ViewProduct seller = new ViewProduct();
+        	seller.setVisible(true);
+        }
+        else {
+        	Login login = new Login();
+        	login.setVisible(true);
+        }
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

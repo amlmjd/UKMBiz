@@ -1,0 +1,9 @@
+
+public class Handbag extends Product{
+
+	public Handbag(String pid, String n, int pr,String ct, String cl, int s,
+			String d) {
+		super(pid, n, pr,ct, cl, s, d);
+	}
+	
+}

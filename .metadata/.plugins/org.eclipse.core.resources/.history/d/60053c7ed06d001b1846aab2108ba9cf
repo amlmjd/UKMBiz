@@ -1,0 +1,93 @@
+import java.util.ArrayList;
+
+public class Product {
+	
+	private String ProductID;
+	private String Name;
+	private String Category;
+	private double Price;
+	private String Colour;
+	private int Stock;
+	private String Description;
+	
+	
+	public Product(String pid, String n, double pr, String cl, String ct, int s, String d) {
+		
+		ProductID = pid;
+		Name = n;
+		Price = pr;
+		Category = ct;
+		Colour = cl;
+		Stock = s;
+		Description = d;
+	}
+
+	public String getProductID() {
+		return ProductID;
+	}
+
+
+	public void setProductID(String pid) {
+		ProductID = pid;
+	}
+
+
+	public String getName() {
+		return Name;
+	}
+
+
+	public void setName(String n) {
+		Name = n;
+	}
+
+
+	public double getPrice() {
+		return Price;
+	}
+
+
+	public void setPrice(int pr) {
+		Price = pr;
+	}
+
+
+	public String getColour() {
+		return Colour;
+	}
+
+
+	public void setColour(String cl) {
+		Colour = cl;
+	}
+
+
+	public String getCategory() {
+		return Category;
+	}
+
+
+	public void setCategory(String ct) {
+		Category = ct;
+	}
+
+
+	public int getStock() {
+		return Stock;
+	}
+
+
+	public void setStock(int s) {
+		Stock = s;
+	}
+
+
+	public String getDescription() {
+		return Description;
+	}
+
+
+	public void setDescription(String d) {
+		Description = d;
+	}
+}

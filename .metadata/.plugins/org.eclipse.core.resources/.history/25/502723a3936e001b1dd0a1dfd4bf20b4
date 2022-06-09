@@ -1,0 +1,227 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.JSeparator;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import java.awt.SystemColor;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.awt.event.ActionEvent;
+
+public class BuyerHomePage extends JFrame implements ActionListener {
+
+	private JPanel contentPane;
+	private JTable tbl_product;
+	private JTextField txtSearch;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BuyerHomePage frame = new BuyerHomePage();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BuyerHomePage() {
+		setTitle("UKMBiz");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 897, 576);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(0, 0, 890, 51);
+		panel_4.setLayout(null);
+		panel_4.setBackground(Color.RED);
+		contentPane.add(panel_4);
+		
+		JLabel lblNewLabel_1 = new JLabel("Home");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblNewLabel_1.setBounds(174, 0, 244, 51);
+		panel_4.add(lblNewLabel_1);
+		
+		JButton btn_LogOut = new JButton("Log Out");
+		btn_LogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();					
+			}
+		});
+		btn_LogOut.setBounds(779, 10, 85, 31);
+		panel_4.add(btn_LogOut);
+		btn_LogOut.setForeground(Color.BLACK);
+		btn_LogOut.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btn_LogOut.setBackground(Color.WHITE);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("pictures/ukmbiz logo3.jpg"));
+		lblNewLabel_2.setBounds(0, 0, 164, 51);
+		panel_4.add(lblNewLabel_2);
+		
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBounds(0, 50, 890, 51);
+		panel_1_1.setLayout(null);
+		panel_1_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1_1.setBackground(Color.PINK);
+		contentPane.add(panel_1_1);
+		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setForeground(Color.RED);
+		separator.setBackground(Color.RED);
+		separator.setBounds(176, 10, 9, 31);
+		panel_1_1.add(separator);
+		
+		JButton btn_AllProduct = new JButton("All Products");
+		btn_AllProduct.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btn_AllProduct.setBorderPainted(false);
+		btn_AllProduct.setBackground(Color.PINK);
+		btn_AllProduct.setBounds(7, 5, 160, 41);
+		panel_1_1.add(btn_AllProduct);
+		
+		txtSearch = new JTextField();
+		txtSearch.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txtSearch.setBounds(230, 18, 135, 19);
+		panel_1_1.add(txtSearch);
+		txtSearch.setColumns(10);
+		
+		JLabel lbl_search = new JLabel("");
+		lbl_search.setIcon(new ImageIcon("pictures/searchicon.png"));
+		lbl_search.setBounds(195, 10, 30, 31);
+		panel_1_1.add(lbl_search);
+		
+		JButton btn_search = new JButton("Search");
+//		btn_search.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				dispose();
+//				SearchProduct search = new SearchProduct();
+//				search.setVisible(true);
+//			}
+//		});
+		
+		btn_search.setForeground(Color.WHITE);
+		btn_search.setBackground(Color.RED);
+		btn_search.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btn_search.setBounds(375, 17, 74, 21);
+		panel_1_1.add(btn_search);
+		
+		JButton btn_cart = new JButton("Cart");
+//		btn_cart.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				dispose();
+//				ProductinCart cart = new ProductinCart();
+//				cart.setVisible(true);
+//			}
+//		});
+		btn_cart.setBackground(Color.RED);
+		btn_cart.setForeground(Color.WHITE);
+		btn_cart.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btn_cart.setIcon(new ImageIcon("pictures/cartIcon.png"));
+		btn_cart.setBounds(716, 10, 135, 31);
+		panel_1_1.add(btn_cart);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 111, 863, 418);
+		contentPane.add(scrollPane);
+		
+		tbl_product = new JTable();
+		scrollPane.setViewportView(tbl_product);
+		tbl_product.setBackground(new Color(255, 228, 225));
+		tbl_product.setRowHeight(60);
+		tbl_product.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+					"Product ID", "Name", "Category", "Color", "Price", "Stock", "Description"
+			}
+		));
+		tbl_product.getColumnModel().getColumn(0).setPreferredWidth(91);
+		
+		String ProductID, Name, Category, Color, Price, Stock, Description,
+		   aProductID, aName, aCategory, aVariation, aPrice, aStock, aDescription;
+	
+		String fileName = "RegisteredProduct.txt";
+		File file = new File(fileName);
+	
+		try {
+			FileReader reader = new FileReader(file);
+			BufferedReader br = new BufferedReader(reader);
+		
+			DefaultTableModel model = (DefaultTableModel)tbl_product.getModel();
+			Object [] lines = br.lines().toArray();
+			for(int i=0; i<lines.length; i++) {
+				String[] row = lines[i].toString().split(";");
+				model.addRow(row);
+			}
+			reader.close();
+			br.close();
+		
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(UpdateProduct.class.getName()).log(Level.SEVERE, null, ex);
+		
+		} catch (IOException ex) {
+			Logger.getLogger(UpdateProduct.class.getName()).log(Level.SEVERE, null, ex);
+		
+		}
+	}
+//
+//				String[] row = lines[1].toString().split(";");
+//				String[] row1 = lines[2].toString().split(";");
+//				String[] row2 = lines[4].toString().split(";");
+
+//			reader.close();
+//			br.close();
+//		
+//		} catch (FileNotFoundException ex) {
+//			Logger.getLogger(UpdateProduct.class.getName()).log(Level.SEVERE, null, ex);
+//		
+//		} catch (IOException ex) {
+//			Logger.getLogger(UpdateProduct.class.getName()).log(Level.SEVERE, null, ex);
+//		
+//		}
+//	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\user\Downloads\Potato2\Potato"/>
+			<item value="C:\Users\user\Desktop\Online Shopping System"/>
+			<item value="D:\Users\User\Desktop\OOP\Java update"/>
+			<item value="C:\Users\user\Downloads\UKMBizLATESTTTT\UKMBizNew"/>
+			<item value="C:\Users\user\Downloads\UKMBIZ new\UKMBIZ"/>
+			<item value="C:\Users\user\Downloads\UKMBIZ"/>
+		</list>
+	</section>
+</section>

@@ -1,0 +1,9 @@
+
+public class Blouse extends Product{
+
+	public Blouse(String pid, String n, int pr,String ct, String cl, int s,
+			String d) {
+		super(pid, n, pr,ct, cl, s, d);
+	}
+	
+}

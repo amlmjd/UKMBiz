@@ -1,0 +1,30 @@
+
+public class Seller{
+	private String SellerID;
+	private User user;
+	
+	public Seller(String sellerID, User user) {
+		
+		SellerID = sellerID;
+		user = user;
+	}
+
+	public String getSellerID() {
+		return SellerID;
+	}
+
+	public void setSellerID(String sellerID) {
+		SellerID = sellerID;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	
+}
